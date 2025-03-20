@@ -83,10 +83,9 @@ class GerenciadorAlunos:
             else:
                 print("Opção inválida! Tente novamente.")
 
-# Função principal
-if __name__ == "__main__":
-    gerenciador = GerenciadorAlunos("alunos.json")
-    gerenciador.menu()
+
+gerenciador = GerenciadorAlunos("alunos.json")
+gerenciador.menu()
 
 # -- Possíveis novas funcionalidades --
 
