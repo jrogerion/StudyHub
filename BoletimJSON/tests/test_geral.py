@@ -1,7 +1,7 @@
 # Importando modulos
 
 import pytest
-from boletim_json_2 import GerenciadorAlunos
+from boletim_json import GerenciadorAlunos
 import os
 import json
 
@@ -9,8 +9,6 @@ import json
 def test_carregar_dados_arquivo_inexistente():
     gerenciador = GerenciadorAlunos("arquivo_inexistente.json")
     assert gerenciador.carregar_dados() == []
-
-test_carregar_dados_arquivo_inexistente()
 
 # Teste 2: Verificar carregamento de dados quando o arquivo existe
 def test_carregar_dados_arquivo_existente():
@@ -31,12 +29,8 @@ def test_carregar_dados_arquivo_existente():
     # Verifica se os dados carregados são iguais aos dados esperados
     assert dados_carregados == dados_esperados
 
-test_carregar_dados_arquivo_existente()
-
-# Teste 3: Verificar o cálculo da média
+#Teste 3: Verificar o cálculo da média
 def test_calculo_media():
     notas = [7.5, 8.0, 6.5, 9.0]
     media = sum(notas) / len(notas)
     assert round(media, 2) == 7.75
-
-test_calculo_media()
