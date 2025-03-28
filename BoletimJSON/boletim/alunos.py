@@ -150,26 +150,5 @@ class GerenciadorAlunos:
 
 
 gerenciador = GerenciadorAlunos("alunos.json")
-#gerenciador.menu()
+gerenciador.menu()
 
-# -- Possíveis novas funcionalidades --
-
-# Adicionar relatórios estatisticos
-# Buscar aluno por nome
-# Editar alunos já cadastrados
-# Excluir um 
-
-# -- Testes com Pytest --
-
-# Testar carregamento de dados
-# Verificar se o método adicionar_aluno adiiona corretamente um aluno a lista
-# e se os dados são salvos no arquivo JSON
-
-# Listar a listagem de alunos
-# Verificar se o metodo listar_alunos exibe corretaemnte os alunos cadastrados
-
-# Testar o cálculo da media
-# Verificar se a média das notas é calculada corretamente
-
-# Testar a validadçao das notas
-# Verificar se o metodo adicionar_aluno valida corretamente as notas (entre 0 e 10)

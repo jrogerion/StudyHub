@@ -9,4 +9,5 @@ def test_requisitos():
     assert gerenciador.calcular_situacao(7.0) == "Aprovado"  # Requisito: média >= 7 aprova
     assert gerenciador.carregar_dados() == []  # Requisito: lista vazia inicial
 
+    # remover arquivo temp criado
     os.remove("aceitacao.json")
