@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Buscar Aluno</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="nome">Nome do Aluno:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <input type="submit" value="Buscar" class="btn">
+    </form>
+
+    {% if resultados is defined %}
+        {% if resultados %}
+            <h3>Resultados para "{{ busca }}"</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Nota 1</th>
+                        <th>Nota 2</th>
+                        <th>Nota 3</th>
+                        <th>Nota 4</th>
+                        <th>Média</th>
+                        <th>Situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aluno in resultados %}
+                    <tr>
+                        <td>{{ aluno.nome }}</td>
+                        <td>{{ aluno.nota1 }}</td>
+                        <td>{{ aluno.nota2 }}</td>
+                        <td>{{ aluno.nota3 }}</td>
+                        <td>{{ aluno.nota4 }}</td>
+                        <td>{{ aluno.media }}</td>
+                        <td>{{ aluno.situacao }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% elif request.method == 'POST' %}
+            <p>Nenhum aluno encontrado com o nome "{{ busca }}".</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
