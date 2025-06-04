@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 import json
 import os
 
@@ -74,17 +74,36 @@ class GerenciadorAlunos:
     def buscar_aluno(self, nome):
         alunos = self.carregar_dados()
         resultados = []
-        
         for aluno in alunos:
             if nome.lower() in aluno["nome"].lower():
                 resultados.append(aluno)
-        
         return resultados
+    
+    def editar_nota(self, nome_aluno, nota_numero, nova_nota):
+        alunos = self.carregar_dados()
+        for aluno in alunos:
+            if aluno["nome"].lower() == nome_aluno.lower():
+                nota_chave = f"nota{nota_numero}"
+                aluno[nota_chave] = float(nova_nota)
+                notas = [aluno["nota1"], aluno["nota2"], aluno["nota3"], aluno["nota4"]]
+                aluno["media"] = round(sum(notas) / len(notas), 2)
+                aluno["situacao"] = self.calcular_situacao(aluno["media"])
+                self.salvar_dados(alunos)
+                return True
+        return False
+    
+    def excluir_aluno(self, nome_aluno):
+        alunos = self.carregar_dados()
+        alunos_filtrados = [aluno for aluno in alunos if aluno["nome"].lower() != nome_aluno.lower()]
+        if len(alunos_filtrados) < len(alunos):
+            self.salvar_dados(alunos_filtrados)
+            return True
+        return False
 
 # Inicializa o gerenciador
 gerenciador = GerenciadorAlunos("alunos.json")
 
-# Rotas da aplicação
+# Rotas
 @app.route('/')
 def index():
     alunos = gerenciador.listar_alunos()
@@ -112,6 +131,26 @@ def buscar():
         resultados = gerenciador.buscar_aluno(nome)
         return render_template('buscar.html', resultados=resultados, busca=nome)
     return render_template('buscar.html')
+
+@app.route('/editar/<nome_aluno>', methods=['GET', 'POST'])
+def editar_aluno(nome_aluno):
+    alunos = gerenciador.listar_alunos()
+    aluno = next((a for a in alunos if a["nome"].lower() == nome_aluno.lower()), None)
+    if not aluno:
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        nota_numero = int(request.form['nota_numero'])
+        nova_nota = float(request.form['nova_nota'])
+        if gerenciador.editar_nota(nome_aluno, nota_numero, nova_nota):
+            return redirect(url_for('index'))
+    
+    return render_template('editar.html', aluno=aluno)
+
+@app.route('/excluir/<nome_aluno>')
+def excluir_aluno(nome_aluno):
+    gerenciador.excluir_aluno(nome_aluno)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

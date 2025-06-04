@@ -25,6 +25,7 @@
                 <th>Nota 4</th>
                 <th>Média</th>
                 <th>Situação</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,10 @@
                 <td>{{ aluno.nota4 }}</td>
                 <td>{{ aluno.media }}</td>
                 <td>{{ aluno.situacao }}</td>
+                <td>
+                    <a href="{{ url_for('editar_aluno', nome_aluno=aluno.nome) }}" class="btn btn-edit">Editar</a>
+                    <a href="{{ url_for('excluir_aluno', nome_aluno=aluno.nome) }}" class="btn btn-delete" onclick="return confirm('Tem certeza?')">Excluir</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

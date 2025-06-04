@@ -20,7 +20,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        h1, h2 {
+        h1, h2, h3 {
             color: #333;
         }
         table {
@@ -43,21 +43,30 @@
         }
         .btn {
             display: inline-block;
-            background: #333;
-            color: #fff;
             padding: 8px 15px;
             text-decoration: none;
             border-radius: 5px;
             margin: 5px 0;
+            color: white;
+            font-size: 14px;
+        }
+        .btn-primary {
+            background: #333;
+        }
+        .btn-edit {
+            background: #4CAF50;
+        }
+        .btn-delete {
+            background: #f44336;
+        }
+        .btn-cancel {
+            background: #757575;
         }
         .btn:hover {
-            background: #555;
+            opacity: 0.8;
         }
         .nav {
             margin-bottom: 20px;
-        }
-        .nav a {
-            margin-right: 10px;
         }
         .stats {
             background: #e7f3fe;
@@ -71,8 +80,11 @@
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
-        input[type="text"], input[type="number"] {
+        input[type="text"], 
+        input[type="number"],
+        select {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
@@ -96,9 +108,9 @@
     <div class="container">
         <h1>Gerenciador de Alunos</h1>
         <div class="nav">
-            <a href="{{ url_for('index') }}" class="btn">Início</a>
-            <a href="{{ url_for('adicionar') }}" class="btn">Adicionar Aluno</a>
-            <a href="{{ url_for('buscar') }}" class="btn">Buscar Aluno</a>
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Início</a>
+            <a href="{{ url_for('adicionar') }}" class="btn btn-primary">Adicionar Aluno</a>
+            <a href="{{ url_for('buscar') }}" class="btn btn-primary">Buscar Aluno</a>
         </div>
         {% block content %}{% endblock %}
     </div>

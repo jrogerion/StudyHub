@@ -1,0 +1,29 @@
+[
+    {
+        "nome": "Maria",
+        "nota1": 8.0,
+        "nota2": 9.5,
+        "nota3": 8.4,
+        "nota4": 8.7,
+        "media": 8.65,
+        "situacao": "Aprovado"
+    },
+    {
+        "nome": "Jose",
+        "nota1": 8.0,
+        "nota2": 8.0,
+        "nota3": 8.0,
+        "nota4": 8.0,
+        "media": 8.0,
+        "situacao": "Aprovado"
+    },
+    {
+        "nome": "Mario",
+        "nota1": 7.0,
+        "nota2": 9.0,
+        "nota3": 8.0,
+        "nota4": 7.0,
+        "media": 7.75,
+        "situacao": "Aprovado"
+    }
+]

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Editar Notas de {{ aluno.nome }}</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="nota_numero">Selecione a nota:</label>
+            <select id="nota_numero" name="nota_numero" required>
+                <option value="1">Nota 1 (Atual: {{ aluno.nota1 }})</option>
+                <option value="2">Nota 2 (Atual: {{ aluno.nota2 }})</option>
+                <option value="3">Nota 3 (Atual: {{ aluno.nota3 }})</option>
+                <option value="4">Nota 4 (Atual: {{ aluno.nota4 }})</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nova_nota">Nova Nota:</label>
+            <input type="number" id="nova_nota" name="nova_nota" min="0" max="10" step="0.1" required>
+        </div>
+        <input type="submit" value="Atualizar Nota" class="btn btn-primary">
+        <a href="{{ url_for('index') }}" class="btn btn-cancel">Cancelar</a>
+    </form>
+{% endblock %}
