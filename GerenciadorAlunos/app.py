@@ -25,8 +25,19 @@ class GerenciadorAlunos:
     def salvar_dados(self, alunos):
         with open(self.arquivo_json, "w", encoding="utf-8") as arquivo:
             json.dump(alunos, arquivo, indent=4, ensure_ascii=False)
+
+    # ---------------
+    def aluno_existe(self, nome):
+        alunos = self.carregar_dados()
+        return any(aluno["nome"].lower() == nome.lower() for aluno in alunos)
+    # -----------------
     
     def adicionar_aluno(self, nome, notas):
+        #-----------
+        if self.aluno_existe(nome):
+            raise ValueError("Já existe um aluno com este nome")
+        # ------------
+
         media = sum(notas) / len(notas)
         
         aluno = {
@@ -120,8 +131,15 @@ def adicionar():
             float(request.form['nota3']),
             float(request.form['nota4'])
         ]
-        gerenciador.adicionar_aluno(nome, notas)
-        return redirect(url_for('index'))
+        
+        try: # ------
+            gerenciador.adicionar_aluno(nome, notas)
+            return redirect(url_for('index'))
+
+        # -----------
+        except ValueError as e:
+            return render_template('adicionar.html', erro=str(e))
+
     return render_template('adicionar.html')
 
 @app.route('/buscar', methods=['GET', 'POST'])
