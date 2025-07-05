@@ -13,7 +13,6 @@ browser.maximize_window()
 try:
     browser.get('https://www.youtube.com')
 
-
     # Caixa de pesquisa
     seach_box = WebDriverWait(browser, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, '.ytSearchboxComponentInput'))
@@ -36,13 +35,5 @@ try:
     seach_button.click()
     sleep(5)
 
-# # Outra pesquisa
-# search_box.click()
-# search_box.send_keys('curso+python')
-# search_button.click()
-# sleep(5)
-
 finally:
     browser.quit()
-
-#browser.close()

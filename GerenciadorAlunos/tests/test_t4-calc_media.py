@@ -45,7 +45,7 @@ class TesteMedia():
     self.driver.find_element(*CAMPO_NOTA4).send_keys("7")
     self.wait.until(EC.element_to_be_clickable(BOTAO_SUBMETER)).click()
     
-    # Verificar média (você precisará adicionar um seletor para a coluna de média)
+    # Verificar média 
     SELETOR_MEDIA = (By.XPATH, "//td[contains(text(), '7.0')]") 
     media_element = self.wait.until(EC.presence_of_element_located(SELETOR_MEDIA))
 
@@ -59,3 +59,4 @@ class TesteMedia():
     self.wait.until(EC.element_to_be_clickable(LINK_EXCLUIR)).click()
     self.wait.until(EC.alert_is_present())
     self.driver.switch_to.alert.accept()
+    self.driver.quit()
